@@ -1,0 +1,35 @@
+form {
+	width: 90%;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.img-responsive {
+	margin: 0 auto;
+}
+
+#short-info p {
+	display: inline;
+}
+
+#short-info {
+	text-align: center;
+}
+
+table {
+	margin: 0 auto;
+}
+
+#short-info td {
+	text-align:center;
+}
+
+#long-info table {
+	width: 70%;
+	margin: auto;
+}
+
+#repo-info table {
+	width: 70%;
+	margin: auto;
+}
