@@ -64,16 +64,53 @@ $(document).ready(function() {
                                     <tr>
                                         <td>Profile URL: </td>
                                         <td><a href="${data.html_url}" target="_blank">${data.html_url}</a></td>
-                                    </tr>
-
-                                    
+                                    </tr>                  
                                 </tbody>
                             </table>
+                        </div><br>
+                        <div id="repo-info" class="flex-container">
                         </div>
                     </div>
                   </div>
                 </div>`;
         });
+        $.get("https://api.github.com/users/"+name+"/repos",
+              function(data,status) {
+                console.log(data);
+                $.each(data,function(index,repo) {
+                    document.getElementById('repo-info').innerHTML += `
+                    <a href="${repo.html_url}" target="_blank" id="card-link">
+                    <div class="my-card flex-item">
+                        <div id="card-head" class="my-card-head">
+                            <p id="head-initial">${repo.name[0].toString().toUpperCase()}</p>
+                        </div>
+                        <div class="my-card-body">${repo.name}
+                            <br><br>
+                            <table id="repo-table">
+                                <thead>
+                                    <tr>
+                                        <th><img src="images/fork.png" width="24" height="24"></th>
+                                        <th><img src="images/star.png" width="24" height="28"></th>
+                                        <th><img src="images/watch.png" width="24" height="20"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>${repo.forks_count}</td>
+                                        <td>${repo.stargazers_count}</td>
+                                        <td>${repo.watchers_count}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div></a>
+                    `;
+                });
+                var r = document.getElementsByClassName('my-card-head');
+                for(var i=0;i<r.length;i++) {
+                    r[i].style.background = '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+                }
+              });
     }
     document.getElementById('input-form').addEventListener('submit',getData,false);
 });
